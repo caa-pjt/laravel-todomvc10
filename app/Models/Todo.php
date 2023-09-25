@@ -11,4 +11,8 @@ class Todo extends Model
 
     var $fillable = ['title'];
 
+    protected $attributes = [
+        'completed' => false,
+    ];    
+
 }
