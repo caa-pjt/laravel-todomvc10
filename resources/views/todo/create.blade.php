@@ -1,4 +1,5 @@
 <x-layout>
+    <h1>New todo</h1>
     <form method="POST" action="/todos">
         @csrf
         @method('POST')

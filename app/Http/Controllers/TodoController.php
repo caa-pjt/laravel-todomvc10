@@ -46,7 +46,7 @@ class TodoController extends Controller
      */
     public function edit(Todo $todo)
     {
-        //
+        return view('todo.edit', ['todo' => $todo]);
     }
 
     /**
@@ -54,7 +54,8 @@ class TodoController extends Controller
      */
     public function update(UpdateTodoRequest $request, Todo $todo)
     {
-        //
+        $todo->update($request->except('_token', '_method'));
+        return redirect()->route('todos.index');
     }
 
     /**

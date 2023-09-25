@@ -12,6 +12,7 @@
             <td>{{ $todo->created_at->format('d.m.Y') }}</td>
             <td>{{ $todo->title }}</td>
             <td><input type="checkbox" {{ $todo->completed ? 'checked' : '' }} disabled></td>
+            <td><a href="{{ route('todos.edit', $todo) }}">Edit</a></td>
         </tr>
     @endforeach
     </table>
