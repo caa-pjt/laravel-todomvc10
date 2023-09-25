@@ -9,4 +9,6 @@ class Todo extends Model
 {
     use HasFactory;
 
+    var $fillable = ['title'];
+
 }

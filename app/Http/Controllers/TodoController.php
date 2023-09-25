@@ -21,7 +21,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        return view('todo.create');
     }
 
     /**
@@ -29,7 +29,8 @@ class TodoController extends Controller
      */
     public function store(StoreTodoRequest $request)
     {
-        //
+        Todo::create($request->except('_token', '_method'));
+        return redirect()->route('todos.index');
     }
 
     /**
