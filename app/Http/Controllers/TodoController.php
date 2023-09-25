@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTodoRequest;
 use App\Http\Requests\UpdateTodoRequest;
+use App\Models\Todo;
 
 class TodoController extends Controller
 {
@@ -12,7 +13,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        //
+        return view('todo.index', ['todos' => Todo::all()->sortByDesc('created_at')]);
     }
 
     /**
