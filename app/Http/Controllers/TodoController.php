@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTodoRequest;
-use App\Http\Requests\UpdateTodoRequest;
+use App\Http\Requests\TodoRequest;
 use App\Models\Todo;
 
 class TodoController extends Controller
@@ -21,13 +20,14 @@ class TodoController extends Controller
      */
     public function create()
     {
-        return view('todo.create');
+        $t = new Todo();
+        return view('todo.create', ['todo' => $t]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTodoRequest $request)
+    public function store(TodoRequest $request)
     {
         Todo::create($request->except('_token', '_method'));
         return redirect()->route('todos.index');
@@ -52,7 +52,7 @@ class TodoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTodoRequest $request, Todo $todo)
+    public function update(TodoRequest $request, Todo $todo)
     {
         $todo->update($request->except('_token', '_method'));
         return redirect()->route('todos.index');
