@@ -15,8 +15,6 @@ use App\Http\Controllers\TodoController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('todos', TodoController::class)->except(['show']);
 
-Route::resource('todos', TodoController::class);
+Route::get('/', [TodoController::class, 'index']);
