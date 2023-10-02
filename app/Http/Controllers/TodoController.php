@@ -30,7 +30,7 @@ class TodoController extends Controller
     public function store(TodoRequest $request)
     {
         Todo::create($request->except('_token', '_method'));
-        return redirect()->route('todos.index');
+        return redirect()->route('todos.index')->with('message', 'Task created !');
     }
 
     /**
@@ -47,7 +47,7 @@ class TodoController extends Controller
     public function update(TodoRequest $request, Todo $todo)
     {
         $todo->update($request->except('_token', '_method'));
-        return redirect()->route('todos.index');
+        return redirect()->route('todos.index')->with('message', 'Task updated !');
     }
 
     /**
@@ -56,6 +56,6 @@ class TodoController extends Controller
     public function destroy(Todo $todo)
     {
         $todo->delete();
-        return redirect()->route('todos.index');        
+        return redirect()->route('todos.index')->with('message', 'Task deleted !');        
     }
 }
