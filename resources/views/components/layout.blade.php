@@ -1,11 +1,11 @@
 <html>
     <head>
         <title>Todo</title>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
-        <h1><a href="{{ route('todos.index') }}">Todo</a></h1>
-        <a href="{{ route('todos.create') }}">New todo</a>
-        <hr/>
-        {{ $slot }}
+        <section class="todoapp">
+            {{ $slot }}
+        </section>
     </body>
 </html>
