@@ -5,7 +5,7 @@
             <input class="new-todo" placeholder="What needs to be done?" name="title" wire:model="title" autofocus>
         </form>
     </header>
-    @if(count($todos) > 0)
+    @if($activeTodoCounter > 0)
         <section class="main">
             <ul class="todo-list">
             @foreach ($todos as $todo)
@@ -39,8 +39,11 @@
                 </li>
                 <li>
                     <a href="#" class="{{ $filterString == 'completed' ? 'selected' : ''}}" wire:click.prevent="filter('completed')">Completed</a>
-                </li>
-            </ul>            
+                </li>                
+            </ul>    
+            @if($completedTodoCounter > 0)        
+                <button class="clear-completed" style="display: block;" wire:click="clearCompleted">Clear completed</button>
+            @endif
         </footer>
     @endif
 </div>
