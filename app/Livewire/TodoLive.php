@@ -20,14 +20,31 @@ class TodoLive extends Component
 
     public $activeTodoCounter;
 
+    public $filterString;
+
     public function mount() {
     }
 
     public function render()
     {
-        $this->todos = Todo::all()->where('completed', '=', '0')->sortByDesc('created_at');
+        switch($this->filterString) {
+            case 'active':
+                $this->todos = Todo::all()->where('completed', '=', '0');
+                break;
+            case 'completed':
+                $this->todos = Todo::all()->where('completed', '=', '1');
+                break;
+            default:
+                $this->todos = Todo::all()->sortByDesc('created_at');
+        }
+
         $this->activeTodoCounter = Todo::where('completed', '=', 0)->count();
         return view('livewire.todo-live');
+    }
+
+    public function filter($filter)
+    {
+        $this->filterString = $filter;
     }
 
     public function store()
@@ -42,7 +59,7 @@ class TodoLive extends Component
     public function complete($id)
     {
         $todo = Todo::find($id);
-        $todo->completed = true;
+        $todo->completed = !$todo->completed;
         $todo->save();
     }
 

@@ -30,6 +30,17 @@
         </section>
         <footer class="footer">
             <span class="todo-count"><strong>{{ $activeTodoCounter }}</strong> {{ Str::plural('item', $activeTodoCounter) }} left</span>
+            <ul class="filters">
+                <li>
+                    <a href="#" class="{{ $filterString == '' ? 'selected' : '' }}" wire:click.prevent="filter('')">All</a>
+                </li>
+                <li>
+                    <a href="#" class="{{ $filterString == 'active' ? 'selected' : '' }}" wire:click.prevent="filter('active')">Active</a>
+                </li>
+                <li>
+                    <a href="#" class="{{ $filterString == 'completed' ? 'selected' : ''}}" wire:click.prevent="filter('completed')">Completed</a>
+                </li>
+            </ul>            
         </footer>
     @endif
 </div>
