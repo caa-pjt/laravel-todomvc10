@@ -29,7 +29,7 @@
             </ul>
         </section>
         <footer class="footer">
-            <span class="todo-count"><strong>{{ count($todos) }}</strong> item left</span>
+            <span class="todo-count"><strong>{{ $activeTodoCounter }}</strong> {{ Str::plural('item', $activeTodoCounter) }} left</span>
         </footer>
     @endif
 </div>

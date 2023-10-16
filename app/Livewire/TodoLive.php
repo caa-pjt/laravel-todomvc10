@@ -18,12 +18,15 @@ class TodoLive extends Component
 
     public $editingId;
 
+    public $activeTodoCounter;
+
     public function mount() {
     }
 
     public function render()
     {
         $this->todos = Todo::all()->where('completed', '=', '0')->sortByDesc('created_at');
+        $this->activeTodoCounter = Todo::where('completed', '=', 0)->count();
         return view('livewire.todo-live');
     }
 
