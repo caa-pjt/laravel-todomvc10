@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use Livewire\Attributes\Rule;
 
 use App\Models\Todo;
 
@@ -10,6 +11,7 @@ class TodoLive extends Component
 {
     public $todos;
 
+    #[Rule('required')] 
     public $title;
 
     public function mount() {
@@ -29,7 +31,10 @@ class TodoLive extends Component
 
     public function store()
     {
-        Todo::create($this->only(['title']));
+        $this->validate();
+        Todo::create([
+            'title' => trim($this->title),
+        ]);
         $this->reset();
     }
 
