@@ -14,4 +14,15 @@ class Todo extends Model
     protected $attributes = [
         'completed' => false,
     ];
+
+    function setTitleOrDelete(String $title)
+    {
+        if(!empty($title)) {
+            $this->title = $title;
+            $this->save();
+        }
+        else {
+            $this->delete();
+        }
+    }
 }

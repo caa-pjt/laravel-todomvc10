@@ -9,16 +9,21 @@
         <section class="main">
             <ul class="todo-list">
             @foreach ($todos as $todo)
-                <li wire:key="{{ $todo->id }}">
+                <li wire:key="{{ $todo->id }}" class="@if($editingId == $todo->id) editing @endif">
                     <div class="view">
                         <input type="checkbox"
                                 value="{{ $todo->completed }}"
                                 wire:click="complete({{ $todo->id}})"
                                 class="toggle"
                                 @if($todo->completed) checked @endif />                    
-                        <label>{{ $todo->title }}</label>
-                    </div>                    
-                    <button class="destroy" wire:click="destroy({{ $todo->id }})"></button>
+                        <label x-on:dblclick="$wire.edit({{ $todo->id }})">{{ $todo->title }}</label>
+                    </div>
+                    <form wire:submit="update({{ $todo->id }})">
+                        <input class="edit" wire:model="editTitle" value="{{ $todo->title }}" @click.away="$wire.cancelEdit">
+                    </form>
+                    @if($editingId != $todo->id)
+                        <button class="destroy" wire:click="destroy({{ $todo->id }})"></button>
+                    @endif
                 </li>
             @endforeach
             </ul>
