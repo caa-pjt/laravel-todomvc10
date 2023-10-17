@@ -5,8 +5,10 @@
             <input class="new-todo" placeholder="What needs to be done?" name="title" wire:model="title" autofocus>
         </form>
     </header>
-    @if($activeTodoCounter > 0)
+    @if(($activeTodoCounter > 0) or ($completedTodoCounter > 0))
         <section class="main">
+            <input id="toggle-all" class="toggle-all" type="checkbox" wire:click="toggleAll" @if($activeTodoCounter == 0) checked @endif>
+            <label for="toggle-all">Mark all as complete</label>
             <ul class="todo-list">
             @foreach ($todos as $todo)
                 <li wire:key="{{ $todo->id }}" class="@if($editingId == $todo->id) editing @endif">

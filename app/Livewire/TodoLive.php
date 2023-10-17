@@ -95,4 +95,14 @@ class TodoLive extends Component
     {
         Todo::where('completed', '=', '1')->delete();
     }
+
+    public function toggleAll()
+    {
+        // if active tasks, update tasks completed = 0 with 1 else do the opposite
+
+        // dd($this->activeTodoCounter);
+
+        Todo::where('completed', '=', $this->activeTodoCounter > 0 ? '0' : '1')
+            ->update(['completed' => $this->activeTodoCounter > 0 ? '1' : '0']);
+    }
 }
