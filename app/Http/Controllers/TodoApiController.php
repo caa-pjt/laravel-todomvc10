@@ -19,24 +19,28 @@ class TodoApiController extends Controller
 
     public function index()
     {
-        return response()->json(Todo::all()->sortByDesc('created_at'));
+        return response()->json(Todo::orderByDesc("created_at")->get());
     }
 
     public function store(TodoRequest $request)
     {
-        $t = Todo::create($request->except('_token', '_method'));
-        return response()->json($t);
+        $data = $request->validated();
+        $todo = Todo::create($data);
+
+        return response()->json($todo, 201);
     }
 
     public function update(TodoRequest $request, Todo $todo)
     {
-        $todo->update($request->except('_token', '_method'));
-        return response()->json($todo);                
+        $data = $request->validated();
+        $todo->update($data);
+
+        return response()->json($todo, 200);
     }
 
     public function destroy(Todo $todo)
     {
         $todo->delete();
-        return response()->json(['success' => 'success'], 200);  
+        return response()->json([], 204);
     }
 }

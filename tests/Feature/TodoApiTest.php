@@ -36,8 +36,8 @@ class TodoApiTest extends TestCase
 
         $response = $this->postJson(route('api.todos.store'), ['title' => 'Test json post']);
 
-        $response->assertStatus(200)
-                 ->assertJsonPath('title', 'Test json post');
+        $response->assertStatus(201)
+            ->assertJsonPath('title', 'Test json post');
     }
 
     public function test_put_todo_logged_in(): void
@@ -48,7 +48,7 @@ class TodoApiTest extends TestCase
         $response = $this->putJson(route('api.todos.update', ['todo' => $t]), ['title' => 'Test json put']);
 
         $response->assertStatus(200)
-                 ->assertJsonPath('title', 'Test json put');
+            ->assertJsonPath('title', 'Test json put');
     }
 
     public function test_delete_todo_logged_in(): void
@@ -58,10 +58,10 @@ class TodoApiTest extends TestCase
 
         $response = $this->deleteJson(route('api.todos.destroy', ['todo' => $t]));
 
-        $response->assertStatus(200);
+        $response->assertStatus(204);
     }
 
-    private function login() 
+    private function login()
     {
         Sanctum::actingAs(
             User::factory()->create()
