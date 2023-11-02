@@ -18,3 +18,7 @@ use App\Http\Controllers\TodoController;
 Route::resource('todos', TodoController::class)->except(['show']);
 
 Route::get('/', [TodoController::class, 'index']);
+
+Route::get("/hello", function () {
+    return "Hello World !";
+});
